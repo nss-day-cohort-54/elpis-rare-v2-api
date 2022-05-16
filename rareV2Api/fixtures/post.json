@@ -1,0 +1,44 @@
+[
+    {
+        "model": "rareV2Api.post",
+        "pk": 1,
+        "fields": {
+            "user_id": 1,
+            "category_id": 1,
+            "title": "I love adventure",
+            "publication_date": "2022-05-16",
+            "image_url": "",
+            "content": "Adventure I love",
+            "approved": true
+
+        }
+    },
+    {
+        "model": "rareV2Api.post",
+        "pk": 2,
+        "fields": {
+            "user_id": 1,
+            "category_id": 2,
+            "title": "Shrek goes to space",
+            "publication_date": "2022-05-16",
+            "image_url": "",
+            "content": "Shrek Trek",
+            "approved": true
+
+        }
+    },
+    {
+        "model": "rareV2Api.post",
+        "pk": 3,
+        "fields": {
+            "user_id": 1,
+            "category_id": 3,
+            "title": "I love when the soccer gets the touch downs",
+            "publication_date": "2022-05-16",
+            "image_url": "",
+            "content": "Soccer is a fun sport-ball",
+            "approved": true
+
+        }
+    }
+]

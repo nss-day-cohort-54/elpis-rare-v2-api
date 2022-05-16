@@ -1,4 +1,3 @@
-import imp 
 from .categories import Categories
 from .comments import Comments
 from .post import Post

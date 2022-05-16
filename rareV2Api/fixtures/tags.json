@@ -1,0 +1,23 @@
+[
+    {
+        "model": "rareV2Api.tags",
+        "pk": 1,
+        "fields": {
+            "label": "Blog"
+        }
+    },
+    {
+        "model": "rareV2Api.tags",
+        "pk": 2,
+        "fields": {
+            "label": "Space"
+        }
+    },
+    {
+        "model": "rareV2Api.tags",
+        "pk": 3,
+        "fields": {
+            "label": "Analysis"
+        }
+    }
+]

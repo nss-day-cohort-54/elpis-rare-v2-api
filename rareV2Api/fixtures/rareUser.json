@@ -1,0 +1,13 @@
+[
+    {
+        "model": "rareV2Api.rareuser",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "bio": "Me",
+            "profile_image_url": "",
+            "created_on": "2022-05-16",
+            "active": true
+        }
+    }
+]

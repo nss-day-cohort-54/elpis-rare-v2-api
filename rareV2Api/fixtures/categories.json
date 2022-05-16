@@ -1,0 +1,23 @@
+[
+    {
+        "model": "rareV2Api.categories",
+        "pk": 1,
+        "fields": {
+            "label": "Adventure"
+        }
+    },
+    {
+        "model": "rareV2Api.categories",
+        "pk": 2,
+        "fields": {
+            "label": "Sci-Fi"
+        }
+    },
+    {
+        "model": "rareV2Api.categories",
+        "pk": 3,
+        "fields": {
+            "label": "Sports"
+        }
+    }
+]

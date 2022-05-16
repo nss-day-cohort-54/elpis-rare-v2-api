@@ -1,0 +1,26 @@
+[
+    {
+        "model": "rareV2Api.reaction",
+        "pk": 1,
+        "fields": {
+            "label": "Thumbs Up",
+            "image_url": "👍" 
+        }
+    },
+    {
+        "model": "rareV2Api.reaction",
+        "pk": 2,
+        "fields": {
+            "label": "Thumbs Down",
+            "image_url": "👎" 
+        }
+    },
+    {
+        "model": "rareV2Api.reaction",
+        "pk": 3,
+        "fields": {
+            "label": "Heart",
+            "image_url": "❤️" 
+        }
+    }
+]
