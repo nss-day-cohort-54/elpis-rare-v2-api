@@ -56,8 +56,7 @@ def register_user(request):
     # Now save the extra info in the rareV2Api_rareuser table
     rareUser = RareUser.objects.create(
         bio=request.data['bio'],
-        profile_image_url=request.data['profile_image_url'],
-        created_on=request.data['created_on'],
+        created_on=request.data['createdOn'],
         active=request.data['active'],
         user=new_user
     )
