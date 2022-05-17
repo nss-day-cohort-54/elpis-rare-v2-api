@@ -15,7 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework import routers
+from rareV2Api.views.post import PostView
+from django.conf.urls import include
+from django.urls import path
+
+# The trailing_slash=False tells the router to accept /gametypes instead of /gametypes/
+router = routers.DefaultRouter(trailing_slash=False)
+
+router.register(r'posts', PostView, 'posts')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include(router.urls)),
 ]
