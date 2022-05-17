@@ -7,6 +7,7 @@ from rest_framework import serializers, status
 from rareV2Api.models import Post
 from rareV2Api.models import Categories
 from rareV2Api.models import RareUser
+from rest_framework.decorators import action
 
 
 
@@ -55,6 +56,14 @@ class PostView(ViewSet):
         # object is to be serialized.
         return Response(serializer.data)
     
+    @action(methods=["get"], detail=False)
+    def current_user_list(self, request):
+        user = RareUser.objects.get(user=request.auth.user)
+        posts = Post.objects.filter(user=user)
+        
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data)
+
     def create(self, request):
         """Handle POST operations
 
