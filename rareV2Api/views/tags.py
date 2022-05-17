@@ -24,10 +24,8 @@ class TagView(ViewSet):
     
     def create(self, request):
         
-        rareUser = RareUser.objects.get(user=request.auth.user)
         serializer = CreateTagsSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(rareUser=rareUser)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
     def update(self, request, pk):
