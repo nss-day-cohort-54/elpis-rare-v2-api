@@ -46,7 +46,7 @@ class PostView(ViewSet):
         # If the 'type' key is not present on the dictionary it will return None.
         user = request.query_params.get('user', None)
         if user is not None:
-            posts = posts.filter(user_id_id=user)
+            posts = posts.filter(user=user)
             
         # The serializer class determines how the Python data should be serialized to be sent 
         # back to the client
@@ -96,12 +96,12 @@ class PostSerializer(serializers.ModelSerializer):
     # to use the Posts model and to include the id andlabel fields.
     class Meta:
         model = Post
-        fields = ('id', 'title', 'publication_date', 'image_url', 'content', 'approved', 'category_id_id', 'user_id_id')
+        fields = ('id', 'title', 'publication_date', 'image_url', 'content', 'approved', 'category', 'user')
         depth = 3
         
 class CreatePostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         # Since the post comes from the Auth header it will not be in the request body
-        fields = ['id', 'title', 'publication_date', 'image_url', 'content', 'approved', 'category_id_id']
+        fields = ['id', 'title', 'publication_date', 'image_url', 'content', 'approved', 'category']
         
