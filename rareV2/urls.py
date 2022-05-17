@@ -8,8 +8,6 @@ from rareV2Api.views.post import PostView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'categories', CategoryView, 'category')
-
-
 router.register(r'posts', PostView, 'posts')
 
 urlpatterns = [
