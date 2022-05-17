@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -56,8 +57,8 @@ def register_user(request):
     # Now save the extra info in the rareV2Api_rareuser table
     rareUser = RareUser.objects.create(
         bio=request.data['bio'],
-        created_on=request.data['createdOn'],
-        active=request.data['active'],
+        created_on=datetime.now(),
+        active=True,
         user=new_user
     )
 
