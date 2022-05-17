@@ -18,11 +18,13 @@ from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
 from rareV2Api.views import register_user, login_user
+from rareV2Api.views.comments import CommentView
 from rareV2Api.views.post import PostView
 
 router = routers.DefaultRouter(trailing_slash=False)
 
 router.register(r'posts', PostView, 'posts')
+router.register(r'comments', CommentView, 'comments')
 
 urlpatterns = [
     path('register', register_user),
