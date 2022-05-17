@@ -43,7 +43,7 @@ class PostView(ViewSet):
         # The request from the method parameters holds all the information for the request from the client. 
         # The request.query_params is a dictionary of any query parameters that were in the url. Using the 
         # .get method on a dictionary is a safe way to find if a key is present on the dictionary. 
-        # If the 'type' key is not present on the dictionary it will return None.
+        # If the 'user' key is not present on the dictionary it will return None.
         user = request.query_params.get('user', None)
         if user is not None:
             posts = posts.filter(user=user)
