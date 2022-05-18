@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
@@ -39,9 +40,10 @@ class CommentView(ViewSet):
         """
         user = RareUser.objects.get(user=request.auth.user)
         post = Post.objects.get(pk=request.data['post_id'])
+        created_on = Comments.objects.create(created_on=datetime.now())
         serializer = CreateCommentsSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(user=user, post=post)
+        serializer.save(user=user, post=post, created_on=created_on)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
     def update(self, request, pk):
