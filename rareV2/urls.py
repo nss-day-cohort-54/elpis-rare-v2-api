@@ -5,7 +5,7 @@ from rest_framework import routers
 from rareV2Api.views import CategoryView
 from rareV2Api.views import register_user, login_user
 from rareV2Api.views.post import PostView
-from rareV2Api.views import register_user, login_user, TagView
+from rareV2Api.views import TagView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'categories', CategoryView, 'category')
