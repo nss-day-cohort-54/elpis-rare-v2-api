@@ -7,6 +7,7 @@ from rest_framework import serializers, status
 from rareV2Api.models import Post
 from rareV2Api.models import Categories
 from rareV2Api.models import RareUser
+from rest_framework.decorators import action
 
 
 
@@ -38,7 +39,7 @@ class PostView(ViewSet):
             Response -- JSON serialized list of posts
         """
         # The post variable is now a list of Post objects
-        posts = Post.objects.all()
+        posts = Post.objects.all().order_by("publication_date")
         
         # The request from the method parameters holds all the information for the request from the client. 
         # The request.query_params is a dictionary of any query parameters that were in the url. Using the 
@@ -55,6 +56,14 @@ class PostView(ViewSet):
         # object is to be serialized.
         return Response(serializer.data)
     
+    @action(methods=["get"], detail=False)
+    def current_user_list(self, request):
+        user = RareUser.objects.get(user=request.auth.user)
+        posts = Post.objects.filter(user=user)
+        
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data)
+
     def create(self, request):
         """Handle POST operations
 
