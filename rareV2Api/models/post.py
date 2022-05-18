@@ -8,3 +8,13 @@ class Post(models.Model):
     image_url = models.CharField(max_length=200)
     content = models.CharField(max_length=300)
     approved = models.BooleanField()
+    
+    @property
+    def is_authorized(self):
+        return self.__is_authorized
+    
+    @is_authorized.setter
+    
+    def is_authorized(self, value):
+        self.__is_authorized=value
+    
