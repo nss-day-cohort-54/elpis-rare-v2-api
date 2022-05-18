@@ -39,7 +39,7 @@ class PostView(ViewSet):
             Response -- JSON serialized list of posts
         """
         # The post variable is now a list of Post objects
-        posts = Post.objects.all()
+        posts = Post.objects.all().order_by("publication_date")
         
         # The request from the method parameters holds all the information for the request from the client. 
         # The request.query_params is a dictionary of any query parameters that were in the url. Using the 
