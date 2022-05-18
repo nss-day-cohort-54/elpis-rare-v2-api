@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
@@ -38,12 +38,12 @@ class CommentView(ViewSet):
         Returns
             Response -- JSON serialized event instance
         """
-        user = RareUser.objects.get(user=request.auth.user)
-        post = Post.objects.get(pk=request.data['post_id'])
-        created_on = Comments.objects.create(created_on=datetime.now())
+        author = RareUser.objects.get(user=request.auth.user)
+        post = Post.objects.get(pk=request.data['post'])
+        request.data['created_on']=datetime.today()
         serializer = CreateCommentsSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(user=user, post=post, created_on=created_on)
+        serializer.save(author=author, post=post)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
     def update(self, request, pk):
@@ -69,8 +69,9 @@ class CommentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
         fields = ('id', 'post', 'author','content', 'created_on')
+        depth=3
         
 class CreateCommentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
-        fields = ['id', 'post_id', 'author_id','content', 'created_on']
+        fields = ['id', 'post_id','content', 'created_on']
