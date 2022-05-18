@@ -41,6 +41,8 @@ class PostView(ViewSet):
         # The post variable is now a list of Post objects
         posts = Post.objects.all().order_by("publication_date")
         
+        current_user = RareUser.objects.get(user=request.auth.user)
+
         # The request from the method parameters holds all the information for the request from the client. 
         # The request.query_params is a dictionary of any query parameters that were in the url. Using the 
         # .get method on a dictionary is a safe way to find if a key is present on the dictionary. 
@@ -48,6 +50,9 @@ class PostView(ViewSet):
         user = request.query_params.get('user', None)
         if user is not None:
             posts = posts.filter(user=user)
+            
+        for post in posts:
+            post.is_authorized=post.user==current_user
             
         # The serializer class determines how the Python data should be serialized to be sent 
         # back to the client
@@ -60,6 +65,9 @@ class PostView(ViewSet):
     def current_user_list(self, request):
         user = RareUser.objects.get(user=request.auth.user)
         posts = Post.objects.filter(user=user)
+        
+        for post in posts:
+            post.is_authorized=post.user==user
         
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
@@ -105,7 +113,7 @@ class PostSerializer(serializers.ModelSerializer):
     # to use the Posts model and to include the id andlabel fields.
     class Meta:
         model = Post
-        fields = ('id', 'title', 'publication_date', 'image_url', 'content', 'approved', 'category', 'user')
+        fields = ('id', 'title', 'publication_date', 'image_url', 'content', 'approved', 'category', 'user', 'is_authorized')
         depth = 3
         
 class CreatePostSerializer(serializers.ModelSerializer):
