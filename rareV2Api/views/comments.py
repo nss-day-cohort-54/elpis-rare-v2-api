@@ -27,7 +27,7 @@ class CommentView(ViewSet):
             Response -- JSON serialized list of Event s
         """
         user = RareUser.objects.get(user=request.auth.user)
-        comments = Comments.objects.all()
+        comments = Comments.objects.all().order_by("created_on")
         serializer = CommentsSerializer(comments, many=True)
         return Response(serializer.data)
     
