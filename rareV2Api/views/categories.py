@@ -3,8 +3,6 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rareV2Api.models import Categories
-from rareV2Api.models import RareUser
-from rest_framework.decorators import action
 
 class CategoryView(ViewSet):
     """Level up game types view"""
