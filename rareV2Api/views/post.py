@@ -6,7 +6,9 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from rareV2Api.models import Post
 from rareV2Api.models import Categories
+from rareV2Api.models import Comments
 from rareV2Api.models import RareUser
+from rareV2Api.views import CommentsSerializer
 from rest_framework.decorators import action
 
 
@@ -40,7 +42,6 @@ class PostView(ViewSet):
         """
         # The post variable is now a list of Post objects
         posts = Post.objects.all().order_by("publication_date")
-        
         current_user = RareUser.objects.get(user=request.auth.user)
 
         # The request from the method parameters holds all the information for the request from the client. 
@@ -53,6 +54,10 @@ class PostView(ViewSet):
             
         for post in posts:
             post.is_authorized=post.user==current_user
+            
+        # for post in posts:
+        #     # Check to see if the comment is in the post comments list
+        #     post.joined = comment in post.comments.all()
             
         # The serializer class determines how the Python data should be serialized to be sent 
         # back to the client
@@ -106,14 +111,38 @@ class PostView(ViewSet):
         post.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
     
+    
+    # @action(methods=['post'], detail=True)
+    # def comment(self, request, pk):
+    #     """Post request to add a comment to a post"""
+    
+    #     comment = Comments.objects.get(request.data['comments'])
+    #     post = Post.objects.get(pk=pk)
+    #     post.comments.add(comment)
+    #     return Response({'message': 'Comment added'}, status=status.HTTP_201_CREATED)
+    
+    # @action(methods=['delete'], detail=True)
+    # def delete_comment(self, request, pk):
+    #     """Post request to add a comment to a post"""
+    
+    #     comment = Comments.objects.get(request.data['comments'])
+    #     post = Post.objects.get(pk=pk)
+    #     post.comments.remove(comment)
+    #     return Response({'message': 'Comment deleted'}, status=status.HTTP_204_NO_CONTENT)
+    
 class PostSerializer(serializers.ModelSerializer):
     """JSON serializer for posts
     """
     # The Meta class hold the configuration for the serializer. We’re telling the serializer 
     # to use the Posts model and to include the id andlabel fields.
+    comments = serializers.SerializerMethodField()
+    def get_comments(self, obj):
+        filter_comments=Comments.objects.filter(post=obj)
+        serializer=CommentsSerializer(filter_comments, many=True)
+        return serializer.data
     class Meta:
         model = Post
-        fields = ('id', 'title', 'publication_date', 'image_url', 'content', 'approved', 'category', 'user', 'is_authorized')
+        fields = ('id', 'title', 'publication_date', 'image_url', 'content', 'approved', 'category', 'user', 'is_authorized', 'comments')
         depth = 3
         
 class CreatePostSerializer(serializers.ModelSerializer):

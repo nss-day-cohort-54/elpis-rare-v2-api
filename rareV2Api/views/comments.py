@@ -30,7 +30,9 @@ class CommentView(ViewSet):
         user = RareUser.objects.get(user=request.auth.user)
         comments = Comments.objects.all().order_by("created_on")
         serializer = CommentsSerializer(comments, many=True)
+        # current_post = Post.objects.get(pk=request.data['post'])
         return Response(serializer.data)
+    
     
     def create(self, request):
         """Handle POST operations
