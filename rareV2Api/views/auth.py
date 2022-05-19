@@ -28,7 +28,8 @@ def login_user(request):
         token = Token.objects.get(user=authenticated_user)
         data = {
             'valid': True,
-            'token': token.key
+            'token': token.key,
+            'is_admin': authenticated_user.is_staff
         }
         return Response(data)
     else:

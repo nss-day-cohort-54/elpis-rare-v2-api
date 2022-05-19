@@ -3,7 +3,8 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rareV2Api.models import Categories
-
+from rareV2Api.models import RareUser
+from rest_framework.decorators import action
 
 class CategoryView(ViewSet):
     """Level up game types view"""
@@ -64,7 +65,7 @@ class CategoryView(ViewSet):
         category = Categories.objects.get(pk=pk)
         category.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
-
+    
 class CategorySerializer(serializers.ModelSerializer):
     """JSON serializer for categories
     """
