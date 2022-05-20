@@ -1,11 +1,11 @@
 [
     {
         "model": "rareV2Api.rareuser",
-        "pk": 1,
+        "pk": 3,
         "fields": {
-            "user": 1,
-            "bio": "Me",
-            "profile_image_url": "",
+            "user": 3,
+            "bio": "Ogres are like onions.",
+            "profile_image_url": "https://64.media.tumblr.com/6a899bd2a9aeb13aaa835b0aa2aeae33/tumblr_inline_mw89y2HPqB1s8w05e.jpg",
             "created_on": "2022-05-16",
             "active": true
         }
