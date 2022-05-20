@@ -55,6 +55,14 @@ class PostView(ViewSet):
         for post in posts:
             post.is_authorized=post.user==current_user
             
+        #filter by category
+        category = request.query_params.get('category', None)
+        if category is not None:
+            posts = posts.filter(category=category)
+            
+        for post in posts:
+            post.is_authorized=post.user==current_user
+            
         # for post in posts:
         #     # Check to see if the comment is in the post comments list
         #     post.joined = comment in post.comments.all()
@@ -76,6 +84,7 @@ class PostView(ViewSet):
         
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
+
 
     def create(self, request):
         """Handle POST operations
